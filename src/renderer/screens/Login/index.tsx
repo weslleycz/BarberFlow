@@ -42,13 +42,12 @@ export const Login = () => {
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="username"
               sx={{
                 background:"#FFFFFF"
               }}
-              label="Email"
-              name="email"
-              autoComplete="email"
+              label="Nome de usuário"
+              name="username"
               autoFocus
             />
             <TextField
