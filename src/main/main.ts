@@ -16,6 +16,10 @@ import './api';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 
+// export const url = app.getPath('appData');
+
+export { app };
+
 class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';
