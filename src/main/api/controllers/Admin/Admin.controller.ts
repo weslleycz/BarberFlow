@@ -24,12 +24,12 @@ export class Admin {
         });
       } else {
         return res.status(400).json({
-          message: 'Senha incorreta',
+          message: 'Senha incorreta. tente novamente',
         });
       }
     } else {
       return res.status(400).json({
-        message: 'Usuário não cadastrado entre em contato com o suporte',
+        message: 'Usuário não cadastrado',
       });
     }
   }
