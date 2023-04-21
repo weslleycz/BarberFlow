@@ -25,7 +25,6 @@ export const Admin = sequelize.define(
     },
   },
   {
-    // Other model options go here
   }
 );
 

@@ -2,6 +2,7 @@ import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
 import { routes } from './routes';
+import { sequelize } from './servers/sqlite-sequelize';
 
 const app = express();
 
@@ -11,6 +12,10 @@ app.use((req, res, next) => {
   app.use(cors());
   next();
 });
+
+(async () =>{
+  await sequelize.sync();
+})()
 
 app.use(helmet());
 
