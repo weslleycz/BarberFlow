@@ -114,11 +114,13 @@
     "helmet": "^6.1.5",
     "jsonwebtoken": "^9.0.0",
     "react": "^18.2.0",
+    "react-calendar": "^4.2.1",
     "react-client-session": "^0.0.8",
     "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.1",
     "sequelize": "^6.31.0",
+    "sqlite3": "^5.1.6",
     "yup": "^1.1.1"
   },
   "devDependencies": {

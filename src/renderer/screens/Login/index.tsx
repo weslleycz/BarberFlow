@@ -1,22 +1,26 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import TextField from '@mui/material/TextField';
 import { Form, Formik } from 'formik';
-import { useState } from 'react';
-import { ReactSession } from 'react-client-session';
+import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import Logo from '../../assets/logo.svg';
 import { api } from '../../servers/api';
 
 export const Login = () => {
-  ReactSession.setStoreType('localStorage');
-  const [valueCheckbox, setValueCheckbox] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies(['token']);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (cookies.token != undefined) {
+      navigate('/dashboard');
+    }
+  }, []);
+
   const Schema = Yup.object().shape({
     username: Yup.string().required(
       'Você precisa informar o seu nome de usuário.'
@@ -26,7 +30,7 @@ export const Login = () => {
 
   return (
     <>
-      <Box color={'#FE2424'}>
+      <Box marginTop={14} color={'#FE2424'}>
         {' '}
         <Formik
           initialValues={{
@@ -42,11 +46,10 @@ export const Login = () => {
                 password,
               });
               const token = request.data.token;
-              if (valueCheckbox) {
-                setCookie('token', token);
-              } else {
-                ReactSession.set('token', token);
-              }
+              setCookie('token', token, {
+                path: '/',
+              });
+              navigate('/dashboard');
             } catch (error: any) {
               const textError = error.response.data.message as string;
               if (textError === 'Usuário não cadastrado') {
@@ -116,26 +119,6 @@ export const Login = () => {
                       error={touched.password && Boolean(errors.password)}
                     />
                     {errors.password?.toString()}
-                    <FormControlLabel
-                      sx={{
-                        color: '#FFFFFF',
-                      }}
-                      control={
-                        <Checkbox
-                          value={valueCheckbox}
-                          onChange={() =>
-                            valueCheckbox === false
-                              ? setValueCheckbox(true)
-                              : setValueCheckbox(false)
-                          }
-                          sx={{
-                            color: '#FFFFFF',
-                          }}
-                          color="primary"
-                        />
-                      }
-                      label="Lembre de mim"
-                    />
                     <Button
                       fullWidth
                       variant="contained"
