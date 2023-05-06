@@ -35,11 +35,6 @@ export class Admin {
   }
   @Post('', [makeValidateBody(AdminDTO)])
   public async registry(@Response() res: IResponse, @Body() body: AdminDTO) {
-    try {
-      console.log('Connection has been established successfully.');
-    } catch (error) {
-      console.error('Unable to connect to the database:', error);
-    }
     const { username, password } = body;
     const admin = <IAdmin>(<unknown>await AdminModel.findOne({
       where: {
